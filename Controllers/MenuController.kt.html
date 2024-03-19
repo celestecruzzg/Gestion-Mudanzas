@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>MenuController.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MenuController.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">Controllers</span>
+
+<span class="s1">import Utils</span><span class="s2">.</span><span class="s1">Printer</span>
+
+<span class="s0">class </span><span class="s1">MenuController </span><span class="s2">{</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">printer </span><span class="s2">= </span><span class="s1">Printer</span><span class="s2">()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">movingRequestController </span><span class="s2">= </span><span class="s1">MovingRequestController</span><span class="s2">()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">clientController </span><span class="s2">= </span><span class="s1">ClientController</span><span class="s2">(</span><span class="s1">printer</span><span class="s2">)</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">workerController </span><span class="s2">= </span><span class="s1">WorkerController</span><span class="s2">(</span><span class="s1">printer</span><span class="s2">)</span>
+
+    <span class="s0">fun </span><span class="s1">showMenu</span><span class="s2">() {</span>
+        <span class="s1">printer</span><span class="s2">.</span><span class="s1">apply </span><span class="s2">{</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">¡Hola, buen día! Bienvenid@ al menú de 'Gestión de mudanzas' &quot; </span><span class="s2">+</span>
+                    <span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">Por favor, ingrese una de las opciones mostradas&quot;</span><span class="s2">)</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">1 - Registrar un trabajador&quot;</span><span class="s2">)</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;2 - Registrar un cliente&quot;</span><span class="s2">)</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;3 - Crear una solicitud de mudanza&quot;</span><span class="s2">)</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;4 - Mostrar los trabajadores registrados&quot;</span><span class="s2">)</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;5 - Mostrar los clientes registrados&quot;</span><span class="s2">)</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;6 - Mostrar las solicitudes de mudanza registradas&quot; </span><span class="s2">+</span>
+                    <span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">)</span>
+
+            <span class="s0">val </span><span class="s1">opcionSeleccionada </span><span class="s2">= </span><span class="s1">readln</span><span class="s2">().</span><span class="s1">toIntOrNull</span><span class="s2">()</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">opcionSeleccionada </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s1">validarOpciones</span><span class="s2">(</span><span class="s1">opcionSeleccionada</span><span class="s2">)</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Opción inválida. Por favor, seleccione una opción válida.&quot;</span><span class="s2">)</span>
+                <span class="s1">showMenu</span><span class="s2">()</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">validarOpciones</span><span class="s2">(</span><span class="s1">opcionSeleccionada: Int</span><span class="s2">) {</span>
+        <span class="s0">when </span><span class="s2">(</span><span class="s1">opcionSeleccionada</span><span class="s2">) {</span>
+            <span class="s4">1 </span><span class="s2">-&gt; {</span>
+                <span class="s1">workerController</span><span class="s2">.</span><span class="s1">registerModel</span><span class="s2">()</span>
+                <span class="s1">showMenu</span><span class="s2">()</span>
+            <span class="s2">}</span>
+            <span class="s4">2 </span><span class="s2">-&gt; {</span>
+                <span class="s1">clientController</span><span class="s2">.</span><span class="s1">registerModel</span><span class="s2">()</span>
+                <span class="s1">showMenu</span><span class="s2">()</span>
+            <span class="s2">}</span>
+            <span class="s4">3 </span><span class="s2">-&gt; {</span>
+                <span class="s1">selectWorkerAndClient</span><span class="s2">()</span>
+                <span class="s1">showMenu</span><span class="s2">()</span>
+            <span class="s2">}</span>
+            <span class="s4">4 </span><span class="s2">-&gt; {</span>
+                <span class="s1">workerController</span><span class="s2">.</span><span class="s1">showAllModels</span><span class="s2">()</span>
+                <span class="s1">showMenu</span><span class="s2">()</span>
+            <span class="s2">}</span>
+            <span class="s4">5 </span><span class="s2">-&gt; {</span>
+                <span class="s1">clientController</span><span class="s2">.</span><span class="s1">showAllModels</span><span class="s2">()</span>
+                <span class="s1">showMenu</span><span class="s2">()</span>
+            <span class="s2">}</span>
+            <span class="s4">6 </span><span class="s2">-&gt; {</span>
+                <span class="s1">movingRequestController</span><span class="s2">.</span><span class="s1">showAllModels</span><span class="s2">()</span>
+                <span class="s1">showMenu</span><span class="s2">()</span>
+            <span class="s2">}</span>
+            <span class="s0">else </span><span class="s2">-&gt; {</span>
+                <span class="s1">printer</span><span class="s2">.</span><span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Opción inválida. Por favor, ingrese un número válido.&quot;</span><span class="s2">)</span>
+                <span class="s1">showMenu</span><span class="s2">()</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">selectWorkerAndClient</span><span class="s2">() {</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">clientController</span><span class="s2">.</span><span class="s1">theresNoRegisteredClients</span><span class="s2">()) {</span>
+            <span class="s1">printer</span><span class="s2">.</span><span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;No se encuentran clientes registrados&quot;</span><span class="s2">)</span>
+            <span class="s1">showMenu</span><span class="s2">()</span>
+            <span class="s0">return</span>
+        <span class="s2">}</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">workerController</span><span class="s2">.</span><span class="s1">theresNoRegisteredWorkers</span><span class="s2">()) {</span>
+            <span class="s1">printer</span><span class="s2">.</span><span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;No se encuentran habitaciones registradas&quot;</span><span class="s2">)</span>
+            <span class="s1">showMenu</span><span class="s2">()</span>
+            <span class="s0">return</span>
+        <span class="s2">}</span>
+
+        <span class="s1">printer</span><span class="s2">.</span><span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Seleccione un cliente&quot;</span><span class="s2">)</span>
+        <span class="s1">clientController</span><span class="s2">.</span><span class="s1">showAllModels</span><span class="s2">()</span>
+
+        <span class="s0">val </span><span class="s1">indexClientSelected </span><span class="s2">= </span><span class="s1">readln</span><span class="s2">().</span><span class="s1">toInt</span><span class="s2">()</span>
+        <span class="s0">val </span><span class="s1">client </span><span class="s2">= </span><span class="s1">clientController</span><span class="s2">.</span><span class="s1">getClientAtIndex</span><span class="s2">(</span><span class="s1">indexClientSelected </span><span class="s2">- </span><span class="s4">1</span><span class="s2">)</span>
+
+        <span class="s1">printer</span><span class="s2">.</span><span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Seleccione un trabajador&quot;</span><span class="s2">)</span>
+        <span class="s1">workerController</span><span class="s2">.</span><span class="s1">showAllModels</span><span class="s2">()</span>
+        <span class="s0">val </span><span class="s1">indexWorkerSelect </span><span class="s2">= </span><span class="s1">readln</span><span class="s2">().</span><span class="s1">toInt</span><span class="s2">()</span>
+        <span class="s0">val </span><span class="s1">worker </span><span class="s2">= </span><span class="s1">workerController</span><span class="s2">.</span><span class="s1">getWorkerAtIndex</span><span class="s2">(</span><span class="s1">indexWorkerSelect </span><span class="s2">- </span><span class="s4">1</span><span class="s2">)</span>
+
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>WorkerController.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+WorkerController.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">Controllers</span>
+
+<span class="s1">import Entities</span><span class="s2">.</span><span class="s1">Worker</span>
+<span class="s1">import Utils</span><span class="s2">.</span><span class="s1">Printer</span>
+
+<span class="s0">class </span><span class="s1">WorkerController</span><span class="s2">(</span><span class="s0">val </span><span class="s1">printer: Printer</span><span class="s2">) </span><span class="s1">: AdministratorController </span><span class="s2">{</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">workerList </span><span class="s2">= </span><span class="s1">mutableListOf</span><span class="s2">&lt;</span><span class="s1">Worker</span><span class="s2">&gt;()</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">registerModel</span><span class="s2">() {</span>
+        <span class="s1">printer</span><span class="s2">.</span><span class="s1">apply </span><span class="s2">{</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Ingrese el nombre(s):&quot;</span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">workerNames </span><span class="s2">= </span><span class="s1">readln</span><span class="s2">()</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Ingrese el apellido paterno:&quot;</span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">workerFirstLastName </span><span class="s2">= </span><span class="s1">readln</span><span class="s2">()</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Ingrese el apellido materno:&quot;</span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">workerSecondLastName </span><span class="s2">= </span><span class="s1">readln</span><span class="s2">()</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Ingrese el número celular:&quot;</span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">phoneNumber </span><span class="s2">= </span><span class="s1">readln</span><span class="s2">().</span><span class="s1">toLong</span><span class="s2">()</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Ingrese el RFC:&quot;</span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">RFC </span><span class="s2">= </span><span class="s1">readln</span><span class="s2">()</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Ingrese el salario que va a percibir:&quot;</span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">salary </span><span class="s2">= </span><span class="s1">readln</span><span class="s2">().</span><span class="s1">toDouble</span><span class="s2">()</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;Ingrese el tipo de empleado:&quot;</span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">typeWorker </span><span class="s2">= </span><span class="s1">readln</span><span class="s2">()</span>
+
+            <span class="s0">val </span><span class="s1">worker </span><span class="s2">= </span><span class="s1">Worker</span><span class="s2">(</span>
+                <span class="s3">&quot;Osvaldo&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Palacios&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Flores&quot;</span><span class="s2">,</span>
+                <span class="s4">1234567890</span><span class="s2">,</span>
+                <span class="s3">&quot;PAFO980728123A&quot;</span><span class="s2">,</span>
+                <span class="s4">4000.00</span><span class="s2">,</span>
+                <span class="s3">&quot;Vendedor&quot;</span>
+            <span class="s2">)</span>
+
+            <span class="s1">workerList</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">worker</span><span class="s2">)</span>
+            <span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;¡El trabajador ha sido registrado exitosamente!&quot;</span><span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">showAllModels</span><span class="s2">() {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">workerList</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">printer</span><span class="s2">.</span><span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;No se encuentran trabajadores registrados&quot;</span><span class="s2">)</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s0">var </span><span class="s1">contador </span><span class="s2">= </span><span class="s4">1</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">client </span><span class="s0">in </span><span class="s1">workerList</span><span class="s2">) {</span>
+                <span class="s1">printer</span><span class="s2">.</span><span class="s1">printMsg</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">$</span><span class="s1">contador</span><span class="s3">-&quot; </span><span class="s2">+ </span><span class="s3">&quot;&quot; </span><span class="s2">+ </span><span class="s1">$worker</span><span class="s2">.</span><span class="s1">getDataWorker</span><span class="s2">())</span>
+                <span class="s1">contador</span><span class="s2">++</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">fun </span><span class="s1">getWorkerAtIndex</span><span class="s2">(</span><span class="s1">index: Int</span><span class="s2">)</span><span class="s1">: Worker? </span><span class="s2">{</span>
+        <span class="s0">return </span><span class="s1">workerList</span><span class="s2">.</span><span class="s1">getOrNull</span><span class="s2">(</span><span class="s1">index</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+    <span class="s0">fun </span><span class="s1">theresNoRegisteredWorkers</span><span class="s2">()</span><span class="s1">: Boolean </span><span class="s2">{</span>
+        <span class="s0">return </span><span class="s1">workerList</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+
+
+</pre>
+</body>
+</html>
